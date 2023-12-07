@@ -43,3 +43,13 @@ Exercise 2.1 In "-greedy action selection, for the case of two actions and " = 0
 the probability that the greedy action is selected?
 
 0.75, ie, 0.5 + 0.5/2.
+
+## Results on 10-arm bandit testbench
+
+### Average Reward vs Episode
+
+* Each episode consits on 2000 runs
+* The environment is not influenced by the agent.
+* The agent_greedy (which only exploits), agent_01 has epsilon of 0.1 and agent_001 has epsilon of 0.01.
+
+![Average Reward vs Episode](./result.png)
