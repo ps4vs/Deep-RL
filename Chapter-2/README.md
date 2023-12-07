@@ -1,3 +1,5 @@
+[Exercises](./Exercises.md)
+
 ---
 title: "Notes x Chapter 2"
 date: 2023-12-06T10:48:23+05:30
@@ -49,4 +51,34 @@ We don't have the exact value of each actions, but we store an estimated value o
 
 ![Average Reward vs Episode](./result.png)
 
-[Exercises](./Exercises.md)
+## Incremental Implementation
+
+$$Q_{n+1} = 1/n \sigma_{i=1}^{n}R_i$$
+$$Q_{n+1} = Q_n + 1/n[R_n-Qn]$$
+
+$$NewEstimate <- OldEstimate + StepSize [Target - OldEstimate]$$
+
+The expression [Target - OldEstimate] is an error in the estimate.
+
+Here, 1/n is called step-size parameter 1/n, generally denoted by $\alpha$ or by $\alpha_t(a)$.
+
+
+## Tracking a Nonstationary Problem
+The averaging method is appropriate for stationary bandit problems, but not bandit problems in which reward probabilities change over time.
+
+Can be done using a constant step-size parameter instead of using step-size parameter that depends on number of terms in the average. This creates exponential recency-weighted average.
+
+## Convergence guarantees.
+
+Let $\alpha_n(a)$ denote the step-size parameter used to process the reward received after the nth selection of action a.
+
+Using stochastic approximation theory, the following conditions are required to assure convergence with probability 1.
+
+$$\sigma_{n=1}^{\infinity}\alpha_n(a) = \infinity$$ and
+$$\sigma_{n=1}^{\infinity}\alpha_n^2(a) < \infinity$$
+
+The first condition gurantee that the steps are large enough to eventually overcome any initial conditions or random fluctuations.
+
+The second condition gurantees that eventually the steps become small enough to assure convergence.
+
+For non-stationary environment, ie, the most common in reinforcement learning and nature requires sequences that do not converge, and are used in applications and empirical research.
