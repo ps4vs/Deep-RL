@@ -15,6 +15,7 @@ class Bandit():
         self.expected_rewards = {i: np.random.normal(0, 1) for i in range(1, k+1)}
         self.std_random_walk = std_random_walk
         self.k = k
+        self.optimal_action = max(self.expected_rewards, key=lambda k: self.expected_rewards[k])
     
     def makeMove(self, action):
         reward = np.random.normal(self.expected_rewards[action], self.std_of_all_action_reward_distributions)
@@ -23,7 +24,8 @@ class Bandit():
         return reward
     
     def reset(self):
-        self.expected_rewards = {i: np.random.normal(0, 1) for i in range(1, self.k+1)}
+        if self.std_random_walk:
+            self.expected_rewards = {i: np.random.normal(0, 1) for i in range(1, self.k+1)}
         return
     
 if __name__=="__main__":
@@ -32,4 +34,5 @@ if __name__=="__main__":
     print(bandit.expected_rewards)
     bandit.makeMove(1)
     print(bandit.expected_rewards)
+    print(bandit.optimal_action)
         

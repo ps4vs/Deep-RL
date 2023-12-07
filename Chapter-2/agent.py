@@ -5,7 +5,7 @@ from Bandit import Bandit
 class Agent():
     """It helps to create an agent for stationary, non-stationary environments, can handle exploration and exploitation tradeoff for a k-armed bandit problem.
     """
-    def __init__(self, numActions=10, epsilon=0.01, alpha=0):
+    def __init__(self, numActions=10, epsilon=0.01, alpha=0, optimistic=0):
         """_summary_
 
         Args:
@@ -16,8 +16,8 @@ class Agent():
         # Q_n+1 = R_n+1 + stepsize (R_n-Qn)
         self.numActions = numActions
         self.epsilon = epsilon
-        self.estimates = {i: 0 for i in range(1, numActions+1)}
-        self.actionCount = {i: 0 for i in range(1, numActions+1)}
+        self.estimates = {i: optimistic for i in range(1, numActions+1)}
+        self.actionCount = {i: 1 for i in range(1, numActions+1)}
         self.previousAction = 0
         self.alpha = alpha
         return
@@ -44,11 +44,11 @@ class Agent():
 
         Args:
             reward (float): The reward recieved for the action taken to update the estimates.
-        """
+        """            
         if self.alpha:
-            self.estimates[self.previousAction] = self.estimates[self.previousAction] + (reward - self.estimates[self.previousAction])/self.alpha
+            self.estimates[self.previousAction] = self.estimates[self.previousAction] + (reward - self.estimates[self.previousAction]) * self.alpha
         else:
-            self.estimates[self.previousAction] = self.estimates[self.previousAction] + 1/self.actionCount[self.previousAction] (reward - self.estimates[self.previousAction])
+            self.estimates[self.previousAction] = self.estimates[self.previousAction] + 1/self.actionCount[self.previousAction]* (reward - self.estimates[self.previousAction])
         return
             
 

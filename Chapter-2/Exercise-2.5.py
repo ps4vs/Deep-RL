@@ -12,7 +12,10 @@ def episode(agent, environment, steps=2000):
     """
     running_reward = 0
     for i in range(steps):
-        running_reward += environment.makeMove(agent.chooseAction())
+        action = agent.chooseAction()
+        reward = environment.makeMove(action)
+        agent.update(reward)
+        running_reward += reward
     return running_reward/steps
 
 def run(environment, nEpisodes, **kwargs):
@@ -33,6 +36,7 @@ def run(environment, nEpisodes, **kwargs):
     plt.title("Average Return vs Episode")
     print("plot created")
     plt.legend()
+    plt.savefig('Exercise-2.5.png')
     plt.show()
     return 
 
@@ -40,5 +44,6 @@ if __name__ == "__main__":
     agent_non_stationary = Agent(10, 0.01, 0.1)
     agent_stationary = Agent(10, 0.01, 0)
     environment = Bandit(10, 1, 0.01)
+    print(environment.expected_rewards)
     run(environment=environment, nEpisodes = 1e4, agent_non_stationary=agent_non_stationary, agent_stationary=agent_stationary)
 

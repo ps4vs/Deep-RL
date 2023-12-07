@@ -1,10 +1,14 @@
-[Exercises](./Exercises.md)
-
 ---
 title: "Notes x Chapter 2"
 date: 2023-12-06T10:48:23+05:30
 draft: true
 ---
+
+[Exercises](./Exercises.md)
+
+### Fun Fun: 
+I'm not reading the book properly, it is clearly visible while trying to do coding exercises after reading. 
+If only I was not doing these questions, I wouldn't have realised my mistake.
 
 ## Introduction
 RL uses training information that evaluates the actions taken rather than instructs by giving correct actions, which is used in other forms of learning. We can create/collect RLHF data using RL Agents, also labelled data can be collected too.
@@ -84,3 +88,11 @@ The second condition gurantees that eventually the steps become small enough to 
 For non-stationary environment, ie, the most common in reinforcement learning and nature requires sequences that do not converge, and are used in applications and empirical research.
 
 ![Agent stationary and Agent non-stationary interacting with non-stationary environment](./Exercise-2.5.png)
+
+## Optimistic Initial Values
+By setting the Optimistic Initial Values, encourages exploration in many cases, eg in our example if we keep Q_o(a)=+5 for all cases, all actions are explored initially even in case of greedy-method.
+
+The sample-average methods, constant step-size method are both dependent on the initial values of q-estimates to certain extent in case of stationary distribution, for non-stationary the initial values doens't affect.
+
+The sample-average methods, inital values play role until each action is explored once, and In constant step-size case it's affect is continued to very long extent or short-extent depending on $\alpha$.
+
