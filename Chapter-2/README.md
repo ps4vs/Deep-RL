@@ -82,3 +82,5 @@ The first condition gurantee that the steps are large enough to eventually overc
 The second condition gurantees that eventually the steps become small enough to assure convergence.
 
 For non-stationary environment, ie, the most common in reinforcement learning and nature requires sequences that do not converge, and are used in applications and empirical research.
+
+![Agent stationary and Agent non-stationary interacting with non-stationary environment](./Exercise-2.5.png)
