@@ -22,7 +22,7 @@ Objective: maximize expected total reward over some time period.
 ### Analysis: 
 * Each of the k actions has an expected or mean reward given that that action is selected, we call this value of that action.
 
-$$q^*(q) \eq E[R_t|A_t=a]$$
+$$q^*(q) = E[R_t|A_t=a]$$
 
 Selecting the action with highest value would be optimal.
 
@@ -39,11 +39,6 @@ We don't have the exact value of each actions, but we store an estimated value o
 * $\epsilon$-greedy or near-greedy action selection rule is behave greedily (ie, exploiting the knowledge) to behave greedily most of the time, but every once in a while, say with small probability $\epsilon$, instead select randomly from among all the actions with equal probability. 
 * Every action will be sampled an infinite number of times, ensuring all the estimates Q_t(a) converges to q*(a).
 
-Exercise 2.1 In "-greedy action selection, for the case of two actions and " = 0.5, what is
-the probability that the greedy action is selected?
-
-0.75, ie, 0.5 + 0.5/2.
-
 ## Results on 10-arm bandit testbench
 
 ### Average Reward vs Episode
@@ -53,3 +48,5 @@ the probability that the greedy action is selected?
 * The agent_greedy (which only exploits), agent_01 has epsilon of 0.1 and agent_001 has epsilon of 0.01.
 
 ![Average Reward vs Episode](./result.png)
+
+[Exercises](./Exercises.md)
