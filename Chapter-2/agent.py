@@ -16,7 +16,8 @@ class Agent():
         # Q_n+1 = R_n+1 + stepsize (R_n-Qn)
         self.numActions = numActions
         self.epsilon = epsilon
-        self.estimates = {i: optimistic for i in range(1, numActions+1)}
+        self.optimistic = optimistic
+        self.estimates = {i: self.optimistic for i in range(1, numActions+1)}
         self.actionCount = {i: 1 for i in range(1, numActions+1)}
         self.previousAction = 0
         self.alpha = alpha
@@ -50,7 +51,11 @@ class Agent():
         else:
             self.estimates[self.previousAction] = self.estimates[self.previousAction] + 1/self.actionCount[self.previousAction]* (reward - self.estimates[self.previousAction])
         return
-            
+    
+    def reset(self):
+        self.estimates = {i: self.optimistic for i in range(1, self.numActions+1)}
+        self.actionCount = {i: 1 for i in range(1, self.numActions+1)}
+        return
 
 if __name__ == "__main__":
     agent = Agent(10, 0, 1)
