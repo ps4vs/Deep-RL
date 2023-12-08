@@ -53,7 +53,7 @@ We don't have the exact value of each actions, but we store an estimated value o
 * The environment is not influenced by the agent.
 * The agent_greedy (which only exploits), agent_01 has epsilon of 0.1 and agent_001 has epsilon of 0.01.
 
-![Average Reward vs Episode](./result.png)
+![Average Reward vs Episode](./images/result.png)
 
 ## Incremental Implementation
 
@@ -87,7 +87,8 @@ The second condition gurantees that eventually the steps become small enough to 
 
 For non-stationary environment, ie, the most common in reinforcement learning and nature requires sequences that do not converge, and are used in applications and empirical research.
 
-![Agent stationary and Agent non-stationary interacting with non-stationary environment](./Exercise-2.5.png)
+![Agent stationary and Agent non-stationary interacting with non-stationary environment](./images/Exercise-2.5-ARvE.png)
+![Agent stationary and Agent non-stationary interacting with non-stationary environment](./images/Exercise-2.5-OAvE.png)
 
 ## Optimistic Initial Values
 By setting the Optimistic Initial Values, encourages exploration in many cases, eg in our example if we keep Q_o(a)=+5 for all cases, all actions are explored initially even in case of greedy-method.
@@ -96,3 +97,5 @@ The sample-average methods, constant step-size method are both dependent on the 
 
 The sample-average methods, inital values play role until each action is explored once, and In constant step-size case it's affect is continued to very long extent or short-extent depending on $\alpha$.
 
+![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-ARvsE.png)
+![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-OAvsE.png)

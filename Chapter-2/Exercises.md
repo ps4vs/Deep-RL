@@ -24,12 +24,12 @@ $$Q_{n+1} = \Pi_{i=1}^nQ_0 + \Sigma_{k=1}^n \alpha_k R_k \Pi_{i=k+1}^n (1-\alpha
 Exercise 2.5 (programming) Design and conduct an experiment to demonstrate the difficulties that sample-average methods have for nonstationary problems. Use a modified version of the 10-armed testbed in which all the q*(a) start out equal and then take independent random walks (say by adding a normally distributed increment with mean 0 and standard deviation 0.01 to all the q*(a) on each step). Prepare plots like Figure 2.2 for an action-value method using sample averages, incrementally computed, and another action-value method using a constant step-size parameter, $\alpha$ = 0.1. Use $\epsilon$ = 0.1 and longer runs, say of 10,000 steps.
 
 Answer is in code.
-![Agent stationary and Agent non-stationary interacting with non-stationary environment](./Exercise-2.5-ARvsE.png)
-![Agent stationary and Agent non-stationary interacting with non-stationary environment](./Exercise-2.5-OAvsE.png)
+![Agent stationary and Agent non-stationary interacting with non-stationary environment](./images/Exercise-2.5-ARvsE.png)
+![Agent stationary and Agent non-stationary interacting with non-stationary environment](./images/Exercise-2.5-OAvsE.png)
 
 *Exercise 2.6: Mysterious Spikes* The results shown in Figure 2.3 should be quite reliable because they are averages over 2000 individual, randomly chosen 10-armed bandit tasks. Why, then, are there oscillations and spikes in the early part of the curve for the optimistic method? In other words, what might make this method perform particularly better or worse, on average, on particular early steps?
-![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./Exercise-2.6-ARvsE.png)
-![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./Exercise-2.6-OAvsE.png)
+![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-ARvsE.png)
+![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-OAvsE.png)
 
 There are osciallation in the optimistic method, the estimates are decreasing for all the actions, because inital estimates are very optimistic. Later at some point, Qt + self.alpha(R-Qt) is decreasing for other actions, but is constant for optimal action.
 

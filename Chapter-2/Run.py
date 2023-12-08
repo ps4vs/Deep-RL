@@ -35,7 +35,7 @@ def run(exercise, environment, runs=2000, steps=1000, **kwargs):
     ax.set_title("Average Return vs Episode")
     print("plot created")
     ax.legend()
-    fig.savefig(f'{exercise}-ARvsE.png')
+    fig.savefig(f'./images/{exercise}-ARvsE.png')
     fig.show()
     
     fig, ax = plt.subplots()
@@ -45,7 +45,7 @@ def run(exercise, environment, runs=2000, steps=1000, **kwargs):
     ax.set_ylabel('Optimal Action %')
     ax.set_title('Optimal action % vs Episode')
     ax.legend()
-    fig.savefig(f'{exercise}-OAvsE.png')
+    fig.savefig(f'./images/{exercise}-OAvsE.png')
     fig.show()
 
     return 
