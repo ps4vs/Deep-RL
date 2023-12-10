@@ -11,3 +11,10 @@ By relying on discipline, you train yourself to commit to your goals, push throu
 This approach helps you build resilience, cultivate self-discipline, and stay committed to your goals over the long term. It also frees you from the ups and downs of relying on motivation and allows you to focus on the process of achieving your goals.
 
 Cultivate discipline as a long-term strategy for success.
+
+
+### Insights
+
+* How can we produce high dimentional reasoning, what is fundamental for constructing hierarchical latent space such as we humans do?
+* Can we use some kindoff network (maybe HyperNetwork, or LNN or RNN) to construct the model to represent by hierarchical latent space? ie, first, second, and third attributes?
+* Using approach i found from NAS, ie, policy gradient, to allow learning to optimize framework to consider non-differentiable function latency, accuracy, instead of just depending on loss.
