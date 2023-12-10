@@ -99,3 +99,49 @@ The sample-average methods, inital values play role until each action is explore
 
 ![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-ARvsE.png)
 ![Agent optimistic greedy and Agent 0.1 epsilon greedy interacting with stationary environment](./images/Exercise-2.6-OAvsE.png)
+
+## Upper-Confidence-Bound Action Selection
+
+$\epsilon$ greedy action selection forces the non-greedy action, but indiscriminately, with no preference for those that are nearly greedy or particular action.
+
+UCB allows exploration, with preference to actions, ie, based on how close their estimates are to being maximal and the uncertainity in their estimates.
+
+$$A_t = argmax_a[Q_t(A_t)+c\sqrt(\frac{ln(t)}{N_t(a)})]$$
+
+If $N_t(a)=0$, then a is considered to be a maximizing action.
+
+The number c controls confidence levels, degree of exploration. The t term, makes sure that, uncertainity of increases when any other action apart from a is choose, and 1/N_t(a) decreases as we choose a. This is very good represtantation of Upper Confidence Bound, as name suggests.
+
+UCB is difficult than epsilon greedy to extend beyond bandits:
+* difficulty dealing with non-stationary problems, more sophisticated methods should be used.
+* difficulty dealing with large-state spaces, particulary when using function approximation
+* In more advanced cases, UCB is not even practical.
+
+
+## Gradient Bandit Algorithm
+* It is different from choosing actions based on estimated action values. 
+* Uses numerical preference for each action for choosing actions
+* These numerical preferences have **no interpretation in terms of reward**, in contrast with estimated action values (ie, which is estimated mean reward we get.)
+* only relative preference of one action over other is needed for choosing action, $H_t(a) \in R$, (if we add 1000 to all numerical preference there will be no affect on action probabilities)
+$$Pr\{A_t=a\} = \frac{e^{H_t(a)}}{\Sigma_{b=1}^{k}e^{H_t(b)}} = \pi_t(a)$$
+
+* This $\pi_t(a)$ is probability of taking action a at time t.
+
+We can learn the softmax-action preferences based on stochastic gradient ascent algorithm.
+
+$$H_{t+1}(A_t) = H_{t}(A_t) + \alpha * (R_t - \bar{R_t}) * (1 - \pi(A_t)) \text{ and}$$
+$$H_{t+1}(a) = H_t(a) - \alpha * (R_t - \bar{R_t}) * \pi(a)  \text{ for all } a!=A_t$$
+
+* $\bar{R_t}$ is called baseline reward, can be anything which is not dependent on the A_t, the proof for above stochastic gradient ascent algorithm from the book sutton and barto is very simple, rigorous and elegant. 
+
+* The $\bar{R_t}$ is simple average over all the rewards gained, over all actions, can be moving average reward too for non-stationary distribution, depends on alpha, constant step-size parameter.
+
+
+## Associative Search (contextual bandits)
+Associative tasks are tasks where we need to associate different actions with different situations, unlike the non-associative task we discussed above k-arm bandit problem, where we are trying to single best action when the task is stationary, and track the best action as it changes over-time when task is non-stationary.
+
+### Example of associative search task or contextual bandits
+Suppose we have several different k-armed bandit tasks, and each step we will be given one of the k-armed bandit task sampled from a distribution. If this task-selection-distribution is stationary, then again this is k-armed bandit problem. (visualise why).
+If the task-selection-distribution is not stationary, and we are given a signal eg color to indicate the task. Then we need to learn policy (ie, mapping a situation to action that are best in that situation).
+
+Associative search tasks (contextual bandits) are intermediate b/w the k-armed bandit problem and full-reinforcement learning problem. They are like full-reinforcement learning problem in that they involve learning a policy, but they are also like our k-armed bandit problem in that each action only affects the immediate reward. If actions are allowed to affect the next situation as well as the reward, then we have full-reinforcement learning problem

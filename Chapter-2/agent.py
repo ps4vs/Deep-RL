@@ -5,7 +5,7 @@ from Bandit import Bandit
 class Agent():
     """It helps to create an agent for stationary, non-stationary environments, can handle exploration and exploitation tradeoff for a k-armed bandit problem.
     """
-    def __init__(self, numActions=10, epsilon=0.01, alpha=0, optimistic=0):
+    def __init__(self, numActions=10, epsilon=0.01, alpha=0, optimistic=0, ucb=0):
         """_summary_
 
         Args:
@@ -19,8 +19,10 @@ class Agent():
         self.optimistic = optimistic
         self.estimates = {i: self.optimistic for i in range(1, numActions+1)}
         self.actionCount = {i: 1 for i in range(1, numActions+1)}
+        self.totalCount = 1
         self.previousAction = 0
         self.alpha = alpha
+        self.ucb = ucb
         return
 
     def chooseAction(self):
@@ -29,14 +31,14 @@ class Agent():
         Returns:
             int: action to take to maximize the expected reward.
         """
-        if np.random.rand() < self.epsilon:
+        if np.random.rand() < self.epsilon and self.ucb:
             # Exploration
             self.previousAction = np.random.randint(1, self.numActions+1)
             self.actionCount[self.previousAction]+=1
             return self.previousAction
         else:
             # Exploitation
-            self.previousAction = max(self.estimates, key=lambda x: self.estimates[x])
+            self.previousAction = max(self.estimates, key=lambda x: self.estimates[x] + self.ucb*np.sqrt(np.log(self.totalCount)/self.actionCount[x]))
             self.actionCount[self.previousAction]+=1
             return self.previousAction
     
@@ -55,6 +57,8 @@ class Agent():
     def reset(self):
         self.estimates = {i: self.optimistic for i in range(1, self.numActions+1)}
         self.actionCount = {i: 1 for i in range(1, self.numActions+1)}
+        self.totalCount = 1
+        self.previousAction = 0
         return
 
 if __name__ == "__main__":
